@@ -1,0 +1,192 @@
+{
+    "location": {
+        "name": "Seattle",
+        "region": "Washington",
+        "country": "United States of America",
+        "lat": 47.6064,
+        "lon": -122.3308,
+        "tz_id": "America/Los_Angeles",
+        "localtime_epoch": 1730677267,
+        "localtime": "2024-11-03 15:41"
+    },
+    "current": {
+        "last_updated_epoch": 1730676600,
+        "last_updated": "2024-11-03 15:30",
+        "is_day": 1,
+        "wind_kph": 5.8
+    },
+    "forecast": {
+        "forecastday": [
+            {
+                "date": "2024-11-03",
+                "date_epoch": 1730592000,
+                "day": {
+                    
+                },
+                "astro": {
+                    "sunrise": "07:58 AM",
+                    "sunset": "05:48 PM",
+                    "moonrise": "10:38 AM",
+                    "moonset": "06:32 PM",
+                    "moon_phase": "Waxing Crescent",
+                    "moon_illumination": 2,
+                    "is_moon_up": 1,
+                    "is_sun_up": 1
+                }
+            },
+            {
+                "date": "2024-11-04",
+                "date_epoch": 1730678400,
+                "day": {
+                    
+                },
+                "astro": {
+                    "sunrise": "06:59 AM",
+                    "sunset": "04:46 PM",
+                    "moonrise": "10:46 AM",
+                    "moonset": "06:13 PM",
+                    "moon_phase": "Waxing Crescent",
+                    "moon_illumination": 6,
+                    "is_moon_up": 1,
+                    "is_sun_up": 1
+                }
+            },
+            {
+                "date": "2024-11-05",
+                "date_epoch": 1730764800,
+                "day": {
+                    
+                },
+                "astro": {
+                    "sunrise": "07:01 AM",
+                    "sunset": "04:45 PM",
+                    "moonrise": "11:46 AM",
+                    "moonset": "07:08 PM",
+                    "moon_phase": "Waxing Crescent",
+                    "moon_illumination": 11,
+                    "is_moon_up": 1,
+                    "is_sun_up": 1
+                }
+            },
+            {
+                "date": "2024-11-06",
+                "date_epoch": 1730851200,
+                "day": {
+                    
+                },
+                "astro": {
+                    "sunrise": "07:02 AM",
+                    "sunset": "04:43 PM",
+                    "moonrise": "12:34 PM",
+                    "moonset": "08:14 PM",
+                    "moon_phase": "Waxing Crescent",
+                    "moon_illumination": 18,
+                    "is_moon_up": 1,
+                    "is_sun_up": 1
+                }
+            },
+            {
+                "date": "2024-11-07",
+                "date_epoch": 1730937600,
+                "day": {
+                    
+                },
+                "astro": {
+                    "sunrise": "07:04 AM",
+                    "sunset": "04:42 PM",
+                    "moonrise": "01:12 PM",
+                    "moonset": "09:30 PM",
+                    "moon_phase": "Waxing Crescent",
+                    "moon_illumination": 27,
+                    "is_moon_up": 1,
+                    "is_sun_up": 1
+                }
+            },
+            {
+                "date": "2024-11-08",
+                "date_epoch": 1731024000,
+                "day": {
+                    
+                },
+                "astro": {
+                    "sunrise": "07:05 AM",
+                    "sunset": "04:40 PM",
+                    "moonrise": "01:41 PM",
+                    "moonset": "10:49 PM",
+                    "moon_phase": "Waxing Crescent",
+                    "moon_illumination": 37,
+                    "is_moon_up": 1,
+                    "is_sun_up": 1
+                }
+            },
+            {
+                "date": "2024-11-09",
+                "date_epoch": 1731110400,
+                "day": {
+                    
+                },
+                "astro": {
+                    "sunrise": "07:07 AM",
+                    "sunset": "04:39 PM",
+                    "moonrise": "02:04 PM",
+                    "moonset": "No moonset",
+                    "moon_phase": "First Quarter",
+                    "moon_illumination": 47,
+                    "is_moon_up": 1,
+                    "is_sun_up": 1
+                }
+            },
+            {
+                "date": "2024-11-10",
+                "date_epoch": 1731196800,
+                "day": {
+                    
+                },
+                "astro": {
+                    "sunrise": "07:08 AM",
+                    "sunset": "04:38 PM",
+                    "moonrise": "02:23 PM",
+                    "moonset": "12:10 AM",
+                    "moon_phase": "Waxing Gibbous",
+                    "moon_illumination": 58,
+                    "is_moon_up": 1,
+                    "is_sun_up": 1
+                }
+            },
+            {
+                "date": "2024-11-11",
+                "date_epoch": 1731283200,
+                "day": {
+                    
+                },
+                "astro": {
+                    "sunrise": "07:10 AM",
+                    "sunset": "04:37 PM",
+                    "moonrise": "02:40 PM",
+                    "moonset": "01:32 AM",
+                    "moon_phase": "Waxing Gibbous",
+                    "moon_illumination": 69,
+                    "is_moon_up": 1,
+                    "is_sun_up": 1
+                }
+            },
+            {
+                "date": "2024-11-12",
+                "date_epoch": 1731369600,
+                "day": {
+                    
+                },
+                "astro": {
+                    "sunrise": "07:11 AM",
+                    "sunset": "04:35 PM",
+                    "moonrise": "02:57 PM",
+                    "moonset": "02:54 AM",
+                    "moon_phase": "Waxing Gibbous",
+                    "moon_illumination": 79,
+                    "is_moon_up": 1,
+                    "is_sun_up": 1
+                }
+            }
+        ]
+    }
+}
