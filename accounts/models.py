@@ -3,9 +3,10 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
-    location = models.TextField()
+    location = models.TextField(default="Seattle")
+    name = models.TextField(default="Awesome Oppossum")
     pass
-    # add additional fields in here
+ 
 
     def __str__(self):
         return self.username

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div
+    class="">
+
+    <h1 class="text-xl font-medium text-violet-500 dark:text-white">{{ object.moon_phase }}</h1>
+    <div class="" alt="reflect">{{ object.reflect_text }}</div>
+    <div class="" alt="manifest">{{ object.manifest_text }}</div>
+    <div class="" alt="ritual">{{ object.ritual_text }}</div>
+    <div class="" alt="intent">{{ object.intent_text }}</div>
+    <div class="" alt="description"><p>Created at: {{object.created_at}}</p></div>
+
+    <div class="flex mt-4 space-x-4">
+        <a href="{% url 'update_entry' object.id %}"
+           class="w-full text-white bg-pink-500 hover:bg-blue-400 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">>
+          Edit
+        </a>
+        <a href="{% url 'delete_entry' object.id %}"
+           class="text-white bg-violet-600 hover:bg-rose-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+          Delete
+        </a>
+      </div>
+</div>
+
+{% endblock %}
