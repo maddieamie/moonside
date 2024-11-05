@@ -1,6 +1,7 @@
 # Create your models here.
 from django.db import models
 from accounts.models import CustomUser
+from django.urls import reverse
 
 class MoonPhase(models.Model):
     date = models.DateField(unique=True)
@@ -26,3 +27,6 @@ class UserJournalEntry(models.Model):
 
     def __str__(self):
         return f"Entry by {self.user.username} on {self.created_at}"
+    
+    def get_absolute_url(self):
+        return reverse('journal_entry_detail', args=[str(self.id)])

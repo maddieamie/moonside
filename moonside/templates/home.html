@@ -2,6 +2,9 @@
 
 
 {% block content %}
-    hello world
+<h1>Today's Moon Phase</h1>
+<p>{{ moon_phase.phase }} - Illumination: {{ moon_phase.illumination }}%</p>
+<a href="{% url 'login' %}">Log In to write a Journal Entry</a>
+
 {% endblock %}
 

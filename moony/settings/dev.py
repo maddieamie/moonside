@@ -7,7 +7,7 @@ ALLOWED_HOSTS = [
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-22sgmf6qdtp+uq@e@cv(y7=5bne^7-8+fj4_u8yg2tl0ln!4fk"
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 CSRF_TRUSTED_ORIGINS = [
     "https://example.com"
@@ -17,8 +17,12 @@ CSRF_TRUSTED_ORIGINS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'database.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('PGDATABASE'),
+        'USER': os.getenv('PGUSER'),
+        'PASSWORD': os.getenv('PGPASSWORD'),
+        'HOST': os.getenv('PGHOST'),
+        'PORT': os.getenv('PGPORT'),
     }
 }
 

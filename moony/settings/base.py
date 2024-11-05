@@ -43,6 +43,11 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + FIRST_PARTY_APPS
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+LOGIN_REDIRECT_URL = 'profile'  
+LOGOUT_REDIRECT_URL = 'login' 
+
+AUTH_USER_MODEL = 'accounts.CustomUser' 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
