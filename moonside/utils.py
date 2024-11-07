@@ -3,6 +3,7 @@ import requests
 from datetime import datetime, timedelta
 from .models import MoonPhase
 from django.templatetags.static import static
+import uuid
 
 def fetch_moon_phase_data(api_key, location="Seattle", days=3):
     url = f"http://api.weatherapi.com/v1/forecast.json?key={api_key}&q={location}&days={days}&aqi=no&alerts=no"
@@ -22,6 +23,7 @@ def fetch_moon_phase_data(api_key, location="Seattle", days=3):
                     "sunrise": moon_data["sunrise"],
                     "sunset": moon_data["sunset"],
                     "illumination": int(moon_data["moon_illumination"]),
+                    "uuid": uuid.uuid4()
                 }
             )
 

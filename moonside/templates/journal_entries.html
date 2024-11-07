@@ -4,12 +4,15 @@
     <h1>Moon Reflection Entries</h1>
     <div>
         {% for entry in entries %}
-        <a href="{% url 'journal_entry_detail' entry.pk %}">- {{ entry.moon_phase }} - Created: {{ entry.created_at}} </a>
+        <a href="{% url 'journal_entry_detail' entry.uuid_id %}">- {{ entry.moon_phase }} - Created: {{ entry.created_at}} </a>
         
     </div>
 
     {% empty %}
     <p>No journal entries yet!</p>
     {% endfor %}
-    <a href="{% url 'create_entry' %}">Create a journal entry.</a>
+
+    {% for moon_phase in moon_phases %}
+    <a href="{% url 'create_entry' moon_phase.uuid_id %}">Create a journal entry for {{ moon_phase.date }}</a>
+    {% endfor %}
 {% endblock %}

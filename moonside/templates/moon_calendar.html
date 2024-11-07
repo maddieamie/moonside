@@ -8,14 +8,22 @@
     <h2>3-Day Moon Forecast for {{ location }}</h2>
     {% if three_day_forecast %}
         <div>
-            {% for day in three_day_forecast %}
+            {% for forecast in three_day_forecast %}
                 <div>
-                    <strong>{{ day.date }}</strong>: 
-                    <img src="{{ day.image }}" alt="{{ day.phase }} image">
-                    <p>{{ day.phase }}</p>
-                    <p>{{ day.illumination }}%</p>
-                    <p>{{ day.moonrise }}</p>
-                    <p>{{ day.moonset }}</p>
+                    <strong>{{ forecast.date }}</strong>: 
+                    <img src="{{ forecast.image }}" alt="{{ forecast.phase }} image">
+                    <p>{{ forecast.phase }}</p>
+                    <p>{{ forecast.illumination }}%</p>
+                    <p>{{ forecast.moonrise }}</p>
+                    <p>{{ forecast.moonset }}</p>
+
+                    
+                {% if user_entry.moon_phase_id %}
+                    <a href="{% url 'update_entry' user_entry.uuid_id %}">Update Journal Entry</a>
+                {% else %}
+                    <a href="{% url 'create_entry' forecast.moon_phase_id %}">Create Journal Entry</a>
+                {% endif %}
+        
                 </div>
             {% endfor %}
             </div>
@@ -44,6 +52,17 @@
                         <td>{{ moon.illumination }}%</td>
                         <td>{{ moon.moonrise }}</td>
                         <td>{{ moon.moonset }}</td>
+                    </tr>
+                    <tr>    
+                    {% if moon.user_entry %}
+                        <td colspan="5">
+                        <a href="{% url 'update_entry' moon.user_entry.uuid_id %}">Update Journal Entry</a>
+                        </td>
+                    {% else %}
+                        <td colspan="5">
+                        <a href="{% url 'create_entry' moon.uuid_id %}">Create Entry</a>
+                        </td>
+                    {% endif %}
                     </tr>
                 {% endfor %}
             </tbody>

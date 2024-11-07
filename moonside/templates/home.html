@@ -16,11 +16,14 @@
 
 {% if user.is_authenticated %}
     {% if user_entry %}
-        <a href="{% url 'update_entry' user_entry.pk %}">Update Today's Journal Entry</a>
+        <a href="{% url 'update_entry' user_entry.uuid_id %}">Update Today's Journal Entry</a>
     {% else %}
-        <a href="{% url 'create_entry' %}">Create Today's Journal Entry</a>
+        <a href="{% url 'create_entry' moon_phase.uuid_id %}">Create Today's Journal Entry</a>
     {% endif %}
+{% else %}
+    <a href="{% url 'login' %}">Login to create entries.</a>
 {% endif %}
+
 
 {% endblock %}
 
