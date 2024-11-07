@@ -1,6 +1,54 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
-    hello world
+    <h1>Moon Phase Calendar</h1>
+    <p>{{ location_note }}</p>
+
+    <!-- Display the 3-day forecast with the user's or fallback location -->
+    <h2>3-Day Moon Forecast for {{ location }}</h2>
+    {% if three_day_forecast %}
+        <div>
+            {% for day in three_day_forecast %}
+                <div>
+                    <strong>{{ day.date }}</strong>: 
+                    <img src="{{ day.image }}" alt="{{ day.phase }} image">
+                    <p>{{ day.phase }}</p>
+                    <p>{{ day.illumination }}%</p>
+                    <p>{{ day.moonrise }}</p>
+                    <p>{{ day.moonset }}</p>
+                </div>
+            {% endfor %}
+            </div>
+    {% else %}
+        <p>Weather forecast data is currently unavailable.</p>
+    {% endif %}
+
+    <!-- Display the moon phase data for the current month -->
+    <h2>Moon Phases for {{ today|date:"F Y" }}</h2>
+    {% if moon_data %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Moon Phase</th>
+                    <th>Illumination</th>
+                    <th>Moonrise</th>
+                    <th>Moonset</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for moon in moon_data %}
+                    <tr>
+                        <td>{{ moon.date }}</td>
+                        <td>{{ moon.phase }}</td>
+                        <td>{{ moon.illumination }}%</td>
+                        <td>{{ moon.moonrise }}</td>
+                        <td>{{ moon.moonset }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No moon phase data available for this month.</p>
+    {% endif %}
 {% endblock %}

@@ -3,8 +3,24 @@
 
 {% block content %}
 <h1>Today's Moon Phase</h1>
-<p>{{ moon_phase.phase }} - Illumination: {{ moon_phase.illumination }}%</p>
-<a href="{% url 'login' %}">Log In to write a Journal Entry</a>
+{% if moon_phase %}
+    <div>
+    <h2> {{moon_phase.date}} </h2>
+    <img src="{{ moon_image }}" alt="Image of {{ moon_phase.phase }} phase">
+    <p>{{ moon_phase.phase }} - Illumination: {{ moon_phase.illumination }}%</p>
+    </div>
+
+{% else %}
+    <p>Moon phase data is not available for today.</p>
+{% endif %}
+
+{% if user.is_authenticated %}
+    {% if user_entry %}
+        <a href="{% url 'update_entry' user_entry.pk %}">Update Today's Journal Entry</a>
+    {% else %}
+        <a href="{% url 'create_entry' %}">Create Today's Journal Entry</a>
+    {% endif %}
+{% endif %}
 
 {% endblock %}
 

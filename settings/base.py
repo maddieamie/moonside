@@ -27,8 +27,8 @@ FIRST_PARTY_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
- "rest_framework",
-    "corsheaders",
+    # "cloudinary_storage",
+    # "cloudinary",
 ]
 
 DJANGO_APPS = [
@@ -47,13 +47,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = 'moonside'  
 LOGOUT_REDIRECT_URL = 'login' 
 
-API_KEY = os.getenv('API_KEY')
-
 AUTH_USER_MODEL = 'accounts.CustomUser' 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
