@@ -1,12 +1,16 @@
 {% load static %}
+{% load static tailwind_tags %}
 
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% tailwind_css %}
     {% include 'meta.html' %}
     {% include 'toast/toast_head.html' %}
     {% block header_scripts %}
+    {% load crispy_forms_tags %}
+
     {% endblock %}
 </head>
 <body>

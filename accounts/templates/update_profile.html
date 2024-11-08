@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="container p-4 mx-auto mt-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-3xl font-semibold text-[#9f7cad]">Update Profile</h2>
+
+    <form method="post" class="mt-6">
+        {% csrf_token %}
+        
+        <div class="mt-4">
+            <label for="location" class="text-lg font-medium text-[#6dc6cc]">Location:</label>
+            <input type="text" id="location" name="location" value="{{ user.userprofile.location }}" class="w-full p-2 mt-2 border border-gray-300 rounded">
+        </div>
+
+        <button type="submit" class="mt-4 bg-[#409ba1] text-white p-2 rounded hover:bg-[#6dc6cc]">
+            Update Info
+        </button>
+    </form>
+</div>
+{% endblock %}

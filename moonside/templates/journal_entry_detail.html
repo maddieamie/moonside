@@ -1,26 +1,58 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
+
+{% block breadcrumbs %}
+    Entry Detail
+{% endblock %}
+
 {% block content %}
-<div
-    class="">
+<div class="container p-4 mx-auto mt-6 bg-white rounded-lg shadow-md">
+    
+    <h1 class="text-2xl font-bold text-[#9f7cad] uppercase mb-4">{{ object.moon_phase }}</h1>
+    
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-1">
+        <!-- Reflect Text Container -->
+        <div class="p-4 border-2 border-dashed border-[#6dc6cc] rounded-lg">
+            <h2 class="text-lg font-semibold uppercase text-[#d7b1e5] mb-2">Reflect</h2>
+            <p class="text-gray-700">{{ object.reflect_text }}</p>
+        </div>
+        
+        <!-- Manifest Text Container -->
+        <div class="p-4 border-2 border-dashed border-[#f9e075] rounded-lg">
+            <h2 class="text-lg font-semibold uppercase text-[#f9e075] mb-2">Manifest</h2>
+            <p class="text-gray-700">{{ object.manifest_text }}</p>
+        </div>
+        
+        <!-- Ritual Text Container -->
+        <div class="p-4 border-2 border-dashed border-[#9f7cad] rounded-lg">
+            <h2 class="text-lg font-semibold uppercase text-[#9f7cad] mb-2">Ritual</h2>
+            <p class="text-gray-700">{{ object.ritual_text }}</p>
+        </div>
+        
+        <!-- Intent Text Container -->
+        <div class="p-4 border-2 border-dashed border-[#409ba1] rounded-lg">
+            <h2 class="text-lg font-semibold uppercase text-[#409ba1] mb-2">Intent</h2>
+            <p class="text-gray-700">{{ object.intent_text }}</p>
+        </div>
+    </div>
 
-    <h1 class="text-xl font-medium text-violet-500 dark:text-white">{{ object.moon_phase }}</h1>
-    <div class="" alt="reflect">{{ object.reflect_text }}</div>
-    <div class="" alt="manifest">{{ object.manifest_text }}</div>
-    <div class="" alt="ritual">{{ object.ritual_text }}</div>
-    <div class="" alt="intent">{{ object.intent_text }}</div>
-    <div class="" alt="description"><p>Created at: {{object.created_at}}</p></div>
+    <!-- Created At Section -->
+    <div class="mt-4">
+        <p class="text-gray-500">Created at: {{ object.created_at }}</p>
+    </div>
 
-    <div class="flex mt-4 space-x-4">
+    <!-- Buttons Section -->
+    <div class="flex mt-6 space-x-4">
         <a href="{% url 'update_entry' object.uuid_id %}"
-           class="w-full text-white bg-pink-500 hover:bg-blue-400 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-          Edit
+           class="w-full text-white bg-[#f9e075] hover:bg-[#6dc6cc] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+           Edit
         </a>
         <a href="{% url 'delete_entry' object.uuid_id %}"
-           class="text-white bg-violet-600 hover:bg-rose-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-          Delete
+           class="w-full text-white bg-[#9f7cad] hover:bg-[#d7b1e5] focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+           Delete
         </a>
-      </div>
+    </div>
 </div>
-
 {% endblock %}

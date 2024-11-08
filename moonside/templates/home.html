@@ -1,29 +1,48 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
+
+{% block breadcrumbs %}
+    Home
+{% endblock %}
 
 {% block content %}
-<h1>Today's Moon Phase</h1>
-{% if moon_phase %}
-    <div>
-    <h2> {{moon_phase.date}} </h2>
-    <img src="{{ moon_image }}" alt="Image of {{ moon_phase.phase }} phase">
-    <p>{{ moon_phase.phase }} - Illumination: {{ moon_phase.illumination }}%</p>
-    </div>
+<div class="container p-4 mx-auto mt-6 text-center bg-white rounded-lg shadow-md">
+    <h1 class="text-3xl font-semibold text-[#9f7cad] mb-4">Today's Moon Phase</h1>
 
-{% else %}
-    <p>Moon phase data is not available for today.</p>
-{% endif %}
-
-{% if user.is_authenticated %}
-    {% if user_entry %}
-        <a href="{% url 'update_entry' user_entry.uuid_id %}">Update Today's Journal Entry</a>
+    {% if moon_phase %}
+        <div>
+            <h2 class="text-2xl font-semibold text-[#409ba1]">{{ moon_phase.date }}</h2>
+            <img src="{{ moon_image }}" alt="Image of {{ moon_phase.phase }} phase" class="w-1/2 mx-auto mt-4 mb-4">
+            <p class="text-[#6dc6cc]">{{ moon_phase.phase }} - Illumination: {{ moon_phase.illumination }}%</p>
+        </div>
     {% else %}
-        <a href="{% url 'create_entry' moon_phase.uuid_id %}">Create Today's Journal Entry</a>
+        <p class="text-[#000000]">Moon phase data is not available for today.</p>
     {% endif %}
-{% else %}
-    <a href="{% url 'login' %}">Login to create entries.</a>
-{% endif %}
 
-
+    {% if user.is_authenticated %}
+        {% if user_entry %}
+            <div class="mt-4">
+                <a href="{% url 'update_entry' user_entry.uuid_id %}" class="px-6 py-2 text-white bg-[#f9e075] rounded-lg hover:bg-[#f9e075] hover:text-[#6dc6cc] transition duration-300">
+                    Update Today's Journal Entry
+                </a>
+            </div>
+        {% else %}
+            <div class="mt-4">
+                <a href="{% url 'create_entry' moon_phase.uuid_id %}" class="px-6 py-2 text-white bg-[#f9e075] rounded-lg hover:bg-[#f9e075] hover:text-[#6dc6cc] transition duration-300">
+                    Create Today's Journal Entry
+                </a>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="mt-4">
+            <a href="{% url 'login' %}" class="px-6 py-2 text-white bg-[#409ba1] rounded-lg hover:bg-[#6dc6cc] hover:text-[#000000] transition duration-300">
+                Login to create entries.
+            </a>
+        </div>
+    {% endif %}
+</div>
 {% endblock %}
+
 

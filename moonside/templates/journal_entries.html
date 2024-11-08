@@ -1,18 +1,37 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
+
+{% block breadcrumbs %}
+    Journal Entries
+{% endblock %}
+
 {% block content %}
-    <h1>Moon Reflection Entries</h1>
-    <div>
+<div class="container p-4 mx-auto mt-6 bg-white rounded-lg shadow-md">
+    <h1 class="text-3xl font-semibold text-[#9f7cad] text-center">Moon Reflection Entries</h1>
+
+    <div class="mt-4 text-center">
         {% for entry in entries %}
-        <a href="{% url 'journal_entry_detail' entry.uuid_id %}">- {{ entry.moon_phase }} - Created: {{ entry.created_at}} </a>
-        
+            <div class="mb-2">
+                <a href="{% url 'journal_entry_detail' entry.uuid_id %}" class="text-[#409ba1] hover:text-[#6dc6cc] font-medium">
+                    - {{ entry.moon_phase }} - Created: {{ entry.created_at }}
+                </a>
+            </div>
+        {% empty %}
+            <p class="text-[#000000]">No journal entries yet!</p>
+        {% endfor %}
     </div>
 
-    {% empty %}
-    <p>No journal entries yet!</p>
-    {% endfor %}
-
-    {% for moon_phase in moon_phases %}
-    <a href="{% url 'create_entry' moon_phase.uuid_id %}">Create a journal entry for {{ moon_phase.date }}</a>
-    {% endfor %}
+    <div class="mt-6 text-center">
+        <h2 class="text-2xl font-semibold text-[#9f7cad]">Create a Journal Entry</h2>
+        {% for moon_phase in moon_phases %}
+            <div class="mt-2">
+                <a href="{% url 'create_entry' moon_phase.uuid_id %}" class="px-6 py-2 text-white bg-[#f9e075] rounded-lg text-center hover:bg-[#f9e075] hover:text-[#6dc6cc] transition duration-300">
+                    Create a journal entry for {{ moon_phase.date }}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

@@ -1,10 +1,47 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
 
-<h1>{{ user_profile.name }}'s Profile</h1>
-<p>Email: {{ user_profile.email }}</p>
-<p>Username: {{ user_profile.username }}</p>
-<p> Location: {{ user_profile.location }}</p>
-
+{% block breadcrumbs %}
+    Profile
 {% endblock %}
+
+{% block content %}
+<div class="container p-4 mx-auto mt-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-3xl font-semibold text-[#9f7cad]">Profile</h2>
+
+    <!-- Profile Picture -->
+    <div class="mt-4">
+        <h3 class="text-xl font-medium text-[#6dc6cc]">Profile Picture</h3>
+        <div class="mt-2">
+            <img src="{% static 'moony/static/moon_images/' %}{{ user.profile_picture }}" alt="Profile Picture" class="object-cover w-32 h-32 rounded-full">
+        </div>
+
+        <div class="flex gap-4 mt-4">
+            <a href="{% url 'profile' username=user.username %}?image=first_quarter.png" class="text-[#f9e075] hover:text-[#f9e075]">First Quarter</a>
+            <a href="{% url 'profile' username=user.username %}?image=full.png" class="text-[#f9e075] hover:text-[#f9e075]">Full</a>
+            <a href="{% url 'profile' username=user.username %}?image=new.png" class="text-[#f9e075] hover:text-[#f9e075]">New</a>
+            <a href="{% url 'profile' username=user.username %}?image=waning_crescent.png" class="text-[#f9e075] hover:text-[#f9e075]">Waning Crescent</a>
+            <a href="{% url 'profile' username=user.username %}?image=waning_gibbous.png" class="text-[#f9e075] hover:text-[#f9e075]">Waning Gibbous</a>
+            <a href="{% url 'profile' username=user.username %}?image=waxing_crescent.png" class="text-[#f9e075] hover:text-[#f9e075]">Waxing Crescent</a>
+            <a href="{% url 'profile' username=user.username %}?image=waxing_gibbous.png" class="text-[#f9e075] hover:text-[#f9e075]">Waxing Gibbous</a>
+        </div>
+    </div>
+
+    <!-- User Info -->
+    <div class="mt-6">
+        <h3 class="text-xl font-medium text-[#6dc6cc]">User Information</h3>
+        <p class="mt-2 text-lg">Name: {{ user.first_name }} {{ user.last_name }}</p>
+        <p class="text-lg">Username: {{ user.username }}</p>
+        <p class="text-lg">Location: {{ user.location }}</p>
+    </div>
+
+    <!-- Update Info Link -->
+    <div class="mt-6">
+        <a href="{% url 'update_profile' username=user.username %}" class="text-[#409ba1] hover:text-[#f9e075]">Update your information</a>
+    </div>
+</div>
+{% endblock %}
+
+

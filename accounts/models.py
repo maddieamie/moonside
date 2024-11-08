@@ -5,6 +5,7 @@ from django.db import models
 class CustomUser(AbstractUser):
     location = models.TextField(default="Seattle")
     name = models.TextField(default="Awesome Oppossum")
+    profile_picture = models.CharField(max_length=255, default='moon_images/full.png')
     pass
  
 

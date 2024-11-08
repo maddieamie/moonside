@@ -1,73 +1,80 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
+
+{% block breadcrumbs %}
+    Calendar
+{% endblock %}
+
 {% block content %}
-    <h1>Moon Phase Calendar</h1>
-    <p>{{ location_note }}</p>
+<div class="container p-4 mx-auto mt-6 bg-white rounded-lg shadow-md">
+    <h1 class="text-3xl font-semibold text-[#9f7cad]">Moon Phase Calendar</h1>
+    <p class="mt-2 text-[#000000]">{{ location_note }}</p>
 
-    <!-- Display the 3-day forecast with the user's or fallback location -->
-    <h2>3-Day Moon Forecast for {{ location }}</h2>
+    <!-- 3-Day Moon Forecast Section -->
+    <h2 class="text-2xl font-semibold text-[#9f7cad] mt-6">3-Day Moon Forecast for {{ location }}</h2>
     {% if three_day_forecast %}
-        <div>
+        <div class="grid grid-cols-3 gap-6 mt-4">
             {% for forecast in three_day_forecast %}
-                <div>
-                    <strong>{{ forecast.date }}</strong>: 
-                    <img src="{{ forecast.image }}" alt="{{ forecast.phase }} image">
-                    <p>{{ forecast.phase }}</p>
-                    <p>{{ forecast.illumination }}%</p>
-                    <p>{{ forecast.moonrise }}</p>
-                    <p>{{ forecast.moonset }}</p>
+                <div class="flex flex-col items-center p-4 bg-[#d7b1e5] rounded-lg shadow-lg">
+                    <img src="{{ forecast.image }}" alt="{{ forecast.phase }} image" class="object-cover w-24 h-24 mb-2 rounded-full">
+                    <strong class="text-[#409ba1]">{{ forecast.date }}</strong>
+                    <p class="text-[#000000]">{{ forecast.phase }}</p>
+                    <p class="text-[#6dc6cc]">{{ forecast.illumination }}%</p>
+                    <p class="text-[#409ba1]">{{ forecast.moonrise }}</p>
+                    <p class="text-[#409ba1]">{{ forecast.moonset }}</p>
 
-                    
-                {% if user_entry.moon_phase_id %}
-                    <a href="{% url 'update_entry' user_entry.uuid_id %}">Update Journal Entry</a>
-                {% else %}
-                    <a href="{% url 'create_entry' forecast.moon_phase_id %}">Create Journal Entry</a>
-                {% endif %}
-        
+                    {% if user_entry.moon_phase_id %}
+                        <a href="{% url 'update_entry' user_entry.uuid_id %}" class="mt-4 px-6 py-2 text-white bg-[#409ba1] rounded-lg text-center hover:bg-[#6dc6cc] transition duration-300">Update Journal Entry</a>
+                    {% else %}
+                        <a href="{% url 'create_entry' forecast.moon_phase_id %}" class="mt-4 px-6 py-2 text-white bg-[#409ba1] rounded-lg text-center hover:bg-[#6dc6cc] transition duration-300">Create Journal Entry</a>
+                    {% endif %}
                 </div>
             {% endfor %}
-            </div>
+        </div>
     {% else %}
-        <p>Weather forecast data is currently unavailable.</p>
+        <p class="text-[#000000] mt-4">Weather forecast data is currently unavailable.</p>
     {% endif %}
 
-    <!-- Display the moon phase data for the current month -->
-    <h2>Moon Phases for {{ today|date:"F Y" }}</h2>
+    <!-- Moon Phases Table for Current Month -->
+    <h2 class="text-2xl font-semibold text-[#9f7cad] mt-6">Moon Phases for {{ today|date:"F Y" }}</h2>
     {% if moon_data %}
-        <table>
+        <table class="w-full mt-4 border-collapse table-auto">
             <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Moon Phase</th>
-                    <th>Illumination</th>
-                    <th>Moonrise</th>
-                    <th>Moonset</th>
+                <tr class="bg-[#9f7cad] text-white">
+                    <th class="p-2 border border-[#000000]">Date</th>
+                    <th class="p-2 border border-[#000000]">Moon Phase</th>
+                    <th class="p-2 border border-[#000000]">Illumination</th>
+                    <th class="p-2 border border-[#000000]">Moonrise</th>
+                    <th class="p-2 border border-[#000000]">Moonset</th>
                 </tr>
             </thead>
             <tbody>
                 {% for moon in moon_data %}
-                    <tr>
-                        <td>{{ moon.date }}</td>
-                        <td>{{ moon.phase }}</td>
-                        <td>{{ moon.illumination }}%</td>
-                        <td>{{ moon.moonrise }}</td>
-                        <td>{{ moon.moonset }}</td>
+                    <tr class="bg-[#f9e075] text-[#000000]">
+                        <td class="p-2 border border-[#000000]">{{ moon.date }}</td>
+                        <td class="p-2 border border-[#000000]">{{ moon.phase }}</td>
+                        <td class="p-2 border border-[#000000]">{{ moon.illumination }}%</td>
+                        <td class="p-2 border border-[#000000]">{{ moon.moonrise }}</td>
+                        <td class="p-2 border border-[#000000]">{{ moon.moonset }}</td>
                     </tr>
-                    <tr>    
-                    {% if moon.user_entry %}
-                        <td colspan="5">
-                        <a href="{% url 'update_entry' moon.user_entry.uuid_id %}">Update Journal Entry</a>
-                        </td>
-                    {% else %}
-                        <td colspan="5">
-                        <a href="{% url 'create_entry' moon.uuid_id %}">Create Entry</a>
-                        </td>
-                    {% endif %}
+                    <tr class="bg-[#f9e075] text-[#000000]">
+                        {% if moon.user_entry %}
+                            <td colspan="5" class="p-4 text-center">
+                                <a href="{% url 'update_entry' moon.user_entry.uuid_id %}" class="px-6 py-2 text-white bg-[#409ba1] rounded-lg text-center hover:bg-[#6dc6cc] transition duration-300">Update Journal Entry</a>
+                            </td>
+                        {% else %}
+                            <td colspan="5" class="p-4 text-center">
+                                <a href="{% url 'create_entry' moon.uuid_id %}" class="px-6 py-2 text-white bg-[#409ba1] rounded-lg text-center hover:bg-[#6dc6cc] transition duration-300">Create Entry</a>
+                            </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     {% else %}
-        <p>No moon phase data available for this month.</p>
+        <p class="text-[#000000] mt-4">No moon phase data available for this month.</p>
     {% endif %}
+</div>
 {% endblock %}

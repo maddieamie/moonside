@@ -23,12 +23,16 @@ SITE_NAME = "moony"
 FIRST_PARTY_APPS = [
     "moonside",
     "accounts",
-    "moony"
+    "moony",
+    "tailwindcontainer"
 ]
 
 THIRD_PARTY_APPS = [
  "rest_framework",
     "corsheaders",
+    'tailwind',
+    'crispy_forms',
+    'crispy_tailwind'
 ]
 
 DJANGO_APPS = [
@@ -118,7 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(PROJECT_DIR, "static")]
+STATICFILES_DIRS = [os.path.join(PROJECT_DIR, "static"), os.path.join(BASE_DIR, "tailwindcontainer/static_src/"), ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Media files
@@ -144,6 +148,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Crispy forms settings
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
+TAILWIND_APP_NAME = "tailwindcontainer"
 
 # Site Version
 SITE_VERSION = "0.1.0"

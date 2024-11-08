@@ -1,17 +1,68 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
+
+{% block breadcrumbs %}
+    Create Entry
+{% endblock %}
+
 {% block content %}
-  <div class="" >
-    <div class="bg-purple-300"> Put accordion here </div>
-    <form class="space-y-6" method="POST">
+<div class="container p-4 mx-auto mt-6 bg-white rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold text-[#9f7cad] uppercase mb-4">Create New Entry</h1>
+    
+    <!-- Accordion Section -->
+    <div id="accordion" class="space-y-4">
+        {% for phase in moon_phases %}
+        <div class="overflow-hidden border-2 border-dashed rounded-lg accordion-item">
+            <button type="button"
+                    class="accordion-header flex justify-between items-center w-full p-4 text-left text-lg font-medium text-white bg-[#{{ phase.color_code }}] hover:bg-[#6dc6cc] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#{{ phase.color_code }}]"
+                    data-toggle="accordion" data-target="#accordion-panel-{{ phase.id }}" aria-expanded="false">
+                {{ phase.name }}
+                <span aria-hidden="true">+</span>
+            </button>
+            <div id="accordion-panel-{{ phase.id }}" class="hidden p-4 text-gray-700 bg-white accordion-panel">
+                <p class="mb-2">Reflect on this phase:</p>
+                <ul class="ml-6 list-disc">
+                    <li>What are your current intentions?</li>
+                    <li>What emotions does this moon phase bring up for you?</li>
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Entry Form -->
+    <form class="mt-6 space-y-6" method="POST">
       {% csrf_token %}
       
-      {{ form.as_p }}
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-1">
+          {{ form.as_p }}
+      </div>
 
       <button type="submit"
-              class="w-full text-white bg-pink-500 hover:bg-blue-400 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+              class="w-full text-white bg-[#f9e075] hover:bg-[#6dc6cc] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
         Create Entry
       </button>
     </form>
-  </div>
+</div>
+
+<!-- Script for Accordion Behavior -->
+<script>
+    document.querySelectorAll('[data-toggle="accordion"]').forEach(button => {
+        button.addEventListener('click', () => {
+            const panel = button.nextElementSibling;
+            const isExpanded = panel.classList.contains('hidden');
+            
+            // Toggle the accordion icon and panel visibility
+            document.querySelectorAll('.accordion-panel').forEach(p => p.classList.add('hidden'));
+            document.querySelectorAll('[aria-expanded]').forEach(b => b.setAttribute('aria-expanded', 'false'));
+            
+            if (isExpanded) {
+                panel.classList.remove('hidden');
+                button.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+</script>
 {% endblock %}
