@@ -1,11 +1,14 @@
 from .base import *
 
-DEBUG = False
+import environ
+from huey import RedisHuey
+from redis import ConnectionPool
+from dotenv import load_dotenv
 
-ALLOWED_HOSTS = [
-    "https://example.com/",
-    "*",
-]
+
+DEBUG = False
+ALLOWED_HOSTS = ["postgres.railway.internal", "*"]
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
@@ -48,8 +51,9 @@ CACHES = {
 # huey - as it is more lightweight than celery
 # To create huey tasks just create a tasks.py file in the app same as celery
 # common decorators are @huey.task() and @huey.periodic_task(crontab(minute=0, hour=0))
-from huey import RedisHuey
-from redis import ConnectionPool
 
 pool = ConnectionPool()
 HUEY = RedisHuey(SITE_NAME, connection_pool=pool.from_url(REDIS_URL))
+
+
+

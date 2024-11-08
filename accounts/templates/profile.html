@@ -11,13 +11,12 @@
 <div class="container p-4 mx-auto mt-6 bg-white rounded-lg shadow-md">
     <h2 class="text-3xl font-semibold text-[#9f7cad]">Profile</h2>
 
-    <!-- Profile Picture -->
     <div class="mt-4">
         <h3 class="text-xl font-medium text-[#6dc6cc]">Profile Picture</h3>
         <div class="mt-2">
-            <img src="{% static 'moony/static/moon_images/' %}{{ user.profile_picture }}" alt="Profile Picture" class="object-cover w-32 h-32 rounded-full">
+            <img src="{% static moon_image %}{{ user.profile_picture }}" alt="Profile Picture" class="object-cover w-32 h-32 rounded-full">
         </div>
-
+    
         <div class="flex gap-4 mt-4">
             <a href="{% url 'profile' username=user.username %}?image=first_quarter.png" class="text-[#f9e075] hover:text-[#f9e075]">First Quarter</a>
             <a href="{% url 'profile' username=user.username %}?image=full.png" class="text-[#f9e075] hover:text-[#f9e075]">Full</a>

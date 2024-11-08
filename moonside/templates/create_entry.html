@@ -8,61 +8,104 @@
 {% endblock %}
 
 {% block content %}
-<div class="container p-4 mx-auto mt-6 bg-white rounded-lg shadow-md">
-    <h1 class="text-2xl font-bold text-[#9f7cad] uppercase mb-4">Create New Entry</h1>
-    
-    <!-- Accordion Section -->
-    <div id="accordion" class="space-y-4">
-        {% for phase in moon_phases %}
-        <div class="overflow-hidden border-2 border-dashed rounded-lg accordion-item">
-            <button type="button"
-                    class="accordion-header flex justify-between items-center w-full p-4 text-left text-lg font-medium text-white bg-[#{{ phase.color_code }}] hover:bg-[#6dc6cc] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#{{ phase.color_code }}]"
-                    data-toggle="accordion" data-target="#accordion-panel-{{ phase.id }}" aria-expanded="false">
-                {{ phase.name }}
-                <span aria-hidden="true">+</span>
-            </button>
-            <div id="accordion-panel-{{ phase.id }}" class="hidden p-4 text-gray-700 bg-white accordion-panel">
-                <p class="mb-2">Reflect on this phase:</p>
-                <ul class="ml-6 list-disc">
-                    <li>What are your current intentions?</li>
-                    <li>What emotions does this moon phase bring up for you?</li>
-                </ul>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-
+  
     <!-- Entry Form -->
-    <form class="mt-6 space-y-6" method="POST">
-      {% csrf_token %}
+    <div class="container p-4 mx-auto mt-6 bg-white rounded-lg shadow-md">
+      <h1 class="text-2xl font-bold text-[#9f7cad] uppercase mb-4">Create New Entry</h1>
+
+      <div class="max-w-2xl mx-auto">
+        <!-- Accordion -->
+        <div id="accordion" class="space-y-4">
+            <!-- New Moon Tab -->
+            <div class="overflow-hidden border border-gray-300 rounded-lg">
+                <button onclick="toggleAccordion('new-moon')" class="w-full px-4 py-3 font-semibold text-left bg-gray-200 hover:bg-gray-300 focus:outline-none">
+                    New Moon – A Time for New Beginnings
+                </button>
+                <div id="new-moon" class="hidden p-4 bg-white">
+                    <p><strong>Keywords:</strong> fresh start, intention setting, blank slate, new opportunities.</p>
+                    <p><strong>Overview:</strong> The New Moon signifies the start of a new cycle, ideal for reflection and setting intentions.</p>
+                    <p><strong>Actions:</strong> Write down intentions, meditate on goals, or create a vision board.</p>
+                </div>
+            </div>
+            <!-- Waxing Crescent Tab -->
+            <div class="overflow-hidden border border-gray-300 rounded-lg">
+                <button onclick="toggleAccordion('waxing-crescent')" class="w-full px-4 py-3 font-semibold text-left bg-gray-200 hover:bg-gray-300 focus:outline-none">
+                    Waxing Crescent – Setting Intentions
+                </button>
+                <div id="waxing-crescent" class="hidden p-4 bg-white">
+                    <p><strong>Keywords:</strong> hope, determination, progress.</p>
+                    <p><strong>Overview:</strong> As the moon begins to show light, this phase encourages forward movement and building momentum on intentions.</p>
+                    <p><strong>Actions:</strong> Start small actions towards goals, visualize growth, and focus on positive habits.</p>
+                </div>
+            </div>
+            <!-- First Quarter Tab -->
+            <div class="overflow-hidden border border-gray-300 rounded-lg">
+                <button onclick="toggleAccordion('first-quarter')" class="w-full px-4 py-3 font-semibold text-left bg-gray-200 hover:bg-gray-300 focus:outline-none">
+                    First Quarter – Overcoming Challenges
+                </button>
+                <div id="first-quarter" class="hidden p-4 bg-white">
+                    <p><strong>Keywords:</strong> decision-making, obstacles, strength.</p>
+                    <p><strong>Overview:</strong> This phase often presents challenges, reminding us that persistence is key.</p>
+                    <p><strong>Actions:</strong> Reevaluate and adjust plans, face obstacles, and make decisive actions.</p>
+                </div>
+            </div>
+            <!-- Waxing Gibbous Tab -->
+            <div class="overflow-hidden border border-gray-300 rounded-lg">
+                <button onclick="toggleAccordion('waxing-gibbous')" class="w-full px-4 py-3 font-semibold text-left bg-gray-200 hover:bg-gray-300 focus:outline-none">
+                    Waxing Gibbous – Refining and Adjusting
+                </button>
+                <div id="waxing-gibbous" class="hidden p-4 bg-white">
+                    <p><strong>Keywords:</strong> refinement, growth, anticipation.</p>
+                    <p><strong>Overview:</strong> Approaching the Full Moon, this phase is about fine-tuning your approach and making necessary adjustments.</p>
+                    <p><strong>Actions:</strong> Reflect on progress, refine plans, and stay focused.</p>
+                </div>
+            </div>
+            <!-- Add more phases as needed in the same format -->
+        </div>
+    </div>
+    
+    <!-- JavaScript for Accordion Behavior -->
+    <script>
+    function toggleAccordion(id) {
+        const element = document.getElementById(id);
+        const isHidden = element.classList.contains('hidden');
+        document.querySelectorAll('#accordion > div > div').forEach(el => el.classList.add('hidden'));
+        if (isHidden) element.classList.remove('hidden');
+    }
+    </script>
       
-      <div class="grid grid-cols-2 gap-4 sm:grid-cols-1">
-          {{ form.as_p }}
-      </div>
-
-      <button type="submit"
-              class="w-full text-white bg-[#f9e075] hover:bg-[#6dc6cc] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-        Create Entry
-      </button>
-    </form>
-</div>
-
-<!-- Script for Accordion Behavior -->
-<script>
-    document.querySelectorAll('[data-toggle="accordion"]').forEach(button => {
-        button.addEventListener('click', () => {
-            const panel = button.nextElementSibling;
-            const isExpanded = panel.classList.contains('hidden');
-            
-            // Toggle the accordion icon and panel visibility
-            document.querySelectorAll('.accordion-panel').forEach(p => p.classList.add('hidden'));
-            document.querySelectorAll('[aria-expanded]').forEach(b => b.setAttribute('aria-expanded', 'false'));
-            
-            if (isExpanded) {
-                panel.classList.remove('hidden');
-                button.setAttribute('aria-expanded', 'true');
-            }
-        });
-    });
-</script>
+      <form method="POST" class="space-y-6">
+          {% csrf_token %}
+          
+          <!-- Form Fields Grid -->
+          <div class="grid grid-cols-2 gap-4 sm:grid-cols-1">
+              
+              <div class="p-4 border-2 border-dashed border-[#6dc6cc] rounded-lg">
+                  <label for="reflect_text" class="text-lg font-semibold uppercase text-[#d7b1e5] mb-2 block">Reflect</label>
+                  <textarea id="reflect_text" name="reflect_text" class="w-full p-2 border border-gray-300 rounded-lg focus:border-[#6dc6cc] focus:ring-[#6dc6cc]" placeholder="Your reflection...">{{ form.reflect_text.value }}</textarea>
+              </div>
+              
+              <div class="p-4 border-2 border-dashed border-[#f9e075] rounded-lg">
+                  <label for="manifest_text" class="text-lg font-semibold uppercase text-[#f9e075] mb-2 block">Manifest</label>
+                  <textarea id="manifest_text" name="manifest_text" class="w-full p-2 border border-gray-300 rounded-lg focus:border-[#f9e075] focus:ring-[#f9e075]" placeholder="Your manifestation...">{{ form.manifest_text.value }}</textarea>
+              </div>
+              
+              <div class="p-4 border-2 border-dashed border-[#9f7cad] rounded-lg">
+                  <label for="ritual_text" class="text-lg font-semibold uppercase text-[#9f7cad] mb-2 block">Ritual</label>
+                  <textarea id="ritual_text" name="ritual_text" class="w-full p-2 border border-gray-300 rounded-lg focus:border-[#9f7cad] focus:ring-[#9f7cad]" placeholder="Your ritual...">{{ form.ritual_text.value }}</textarea>
+              </div>
+              
+              <div class="p-4 border-2 border-dashed border-[#409ba1] rounded-lg">
+                  <label for="intent_text" class="text-lg font-semibold uppercase text-[#409ba1] mb-2 block">Intent</label>
+                  <textarea id="intent_text" name="intent_text" class="w-full p-2 border border-gray-300 rounded-lg focus:border-[#409ba1] focus:ring-[#409ba1]" placeholder="Your intent...">{{ form.intent_text.value }}</textarea>
+              </div>
+          </div>
+          
+          <!-- Submit Button -->
+          <button type="submit" class="w-full text-white bg-[#f9e075] hover:bg-[#6dc6cc] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+              Save Entry
+          </button>
+      </form>
+  </div>
+  
 {% endblock %}
